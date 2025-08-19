@@ -19,6 +19,7 @@ body {
   font-family: kanit;
   padding: 50px;
   background-color: var(--muted-color-100);
+  min-width: 320px;
 }
 
 .app-wrapper {
@@ -47,20 +48,30 @@ body {
   background-color: var(--highlight-color);
   padding: 20px;
   border-radius: 15px;
+  width: fit-content;
+  max-width: 800px;
+  min-height: 300px;
+  border: 5px solid var(--secondary-color);
+  box-sizing: border-box;
 }
 
 .product .product-detail {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex: 1;
+  min-height: 250px;
 }
+
 
 .product .product-detail .product-actions {
   display: flex;
+  margin-top: auto;
 }
 
 .product .product-preview {
   margin-right: 40px;
+  flex-shrink: 0;
 }
 
 .product-text-input {
@@ -82,6 +93,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .product-list .product {

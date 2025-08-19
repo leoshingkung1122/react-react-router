@@ -27,8 +27,7 @@ function HomePage() {
     try {
       await axios.delete(`http://localhost:4001/products/${productId}`);
       // Refresh the products list after deletion
-      setIsError(false);
-      getProducts();
+      
       
     } catch (error) {
       console.error("Error deleting product:", error);
