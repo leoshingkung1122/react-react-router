@@ -26,8 +26,8 @@ function HomePage() {
   const handleDeleteProduct = async (productId) => {
     try {
       await axios.delete(`http://localhost:4001/products/${productId}`);
+      getProducts();
       // Refresh the products list after deletion
-      
       
     } catch (error) {
       console.error("Error deleting product:", error);
