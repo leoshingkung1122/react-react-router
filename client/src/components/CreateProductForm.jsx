@@ -31,7 +31,14 @@ function CreateProductForm() {
         description: description
       });
       setIsError(false);
-      console.log(results.data);
+
+      console.log({
+        name,
+        image,
+        price: parseInt(price),
+        description
+      });
+      
       setName("");
       setImage("");
       setPrice("");
