@@ -30,10 +30,10 @@ function HomePage() {
       <div className="product-list">
         {products.map((product) => {
           return (
-            <div className="product">
+            <div className="product" key={product.name}>
               <div className="product-preview">
                 <img
-                  src="https://via.placeholder.com/250/250"
+                  src={product.image}
                   alt="some product"
                   width="250"
                   height="250"
