@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 
 
 function EditProductForm() {
+  const { id } = useParams();
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -15,7 +16,33 @@ function EditProductForm() {
   const [isLoading, setIsLoading] = useState(null);
   const [isSuccess, setIsSuccess] = useState(null);
 
-  const param = useParams();
+  // Load existing product data when component mounts
+  useEffect(() => {
+    if (id) {
+      getProduct();
+    }
+  }, [id]);
+
+  const getProduct = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`http://localhost:4001/products/${id}`);
+      const product = response.data.data;
+      
+      // Set the form fields with existing product data
+      setName(product.name);
+      setImage(product.image);
+      setPrice(product.price.toString());
+      setDescription(product.description);
+      
+      setIsError(false);
+    } catch (error) {
+      console.error("Error loading product:", error);
+      setIsError("Failed to load product");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +54,7 @@ function EditProductForm() {
     setIsLoading(true);
     setIsSuccess(false);
     try {
-      await axios.put(`http://localhost:4001/products/${param.id}`, {
+      await axios.put(`http://localhost:4001/products/${id}`, {
         name: name,
         image: image,
         price: parseInt(price),
@@ -142,9 +169,9 @@ function EditProductForm() {
       <div className="form-actions">
         <button type="submit">Update</button>
       </div>
-      {isLoading && <p>Loading...</p>}
-      {isError && <p style={{ color: "red", fontWeight: "bold" , fontSize: "30px"}}>{isError}</p>}
-      {isSuccess && <p style={{ color: "green", fontWeight: "bold" , fontSize: "30px"}}>{isSuccess}</p>}
+      {isLoading && <p style={{ color: "blue", fontWeight: "bold", fontSize: "30px" }}>Loading...</p>}
+      {isError && <p style={{ color: "red", fontWeight: "bold", fontSize: "30px" }}>{isError}</p>}
+      {isSuccess && <p style={{ color: "green", fontWeight: "bold", fontSize: "30px" }}>{isSuccess}</p>}
     </form>
   );
 }
