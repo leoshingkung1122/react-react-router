@@ -12,9 +12,10 @@ function HomePage() {
       setIsLoading(true);
       const results = await axios("http://localhost:4001/products");
       setProducts(results.data.data);
-      setIsLoading(false);
     } catch (error) {
       setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
