@@ -27,10 +27,12 @@ function HomePage() {
     try {
       await axios.delete(`http://localhost:4001/products/${productId}`);
       // Refresh the products list after deletion
+      setIsError(false);
       getProducts();
+      
     } catch (error) {
       console.error("Error deleting product:", error);
-      setIsError(true);
+      setIsError("Failed to delete product");
     }
   };
 
@@ -45,7 +47,7 @@ function HomePage() {
         <button onClick={() => navigate("/products/create")}>Create Product</button>
       </div>
       <div className="product-list">
-      {isError ? <h1 style={{ color: "red", fontWeight: "bold" , fontSize: "30px" , marginBottom: "20px"}}>Request failed</h1> : null}
+      {isError ? <h1 style={{ color: "red", fontWeight: "bold" , fontSize: "30px" , marginBottom: "20px"}}>{isError}</h1> : null}
       {isLoading ? <h1 style={{ color: "red", fontWeight: "bold" , fontSize: "30px" , marginBottom: "20px"}}>Loading ....</h1> : null}
         {products.map((product) => {
           return (

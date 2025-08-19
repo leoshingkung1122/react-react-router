@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 
 function CreateProductForm() {
-  const navigate = useNavigate();
+ 
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -38,7 +38,7 @@ function CreateProductForm() {
         price: parseInt(price),
         description
       });
-      
+
       setName("");
       setImage("");
       setPrice("");
